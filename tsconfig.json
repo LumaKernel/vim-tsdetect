@@ -1,0 +1,31 @@
+{
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "allowJs": true,
+    "isolatedModules": false,
+    "module": "CommonJS",
+    "target": "es2015",
+    "noEmit": true,
+    "strict": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
+    "forceConsistentCasingInFileNames": true,
+    "importsNotUsedAsValues": "remove",
+    "preserveConstEnums": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noLib": true,
+    "useDefineForClassFields": true,
+    "baseUrl": "src",
+    "inlineSourceMap": true
+  }
+}
