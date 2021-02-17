@@ -1,5 +1,5 @@
 {
-  "name": "coc-tsenv",
+  "name": "coc-tsdetect",
   "version": "1.0.0",
   "description": "coc.nvim extensions for detecting node and deno environment.",
   "keywords": [
@@ -31,9 +31,9 @@
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "coc.nvim TSEnv",
+      "title": "coc.nvim TypeScript Detect",
       "properties": {
-        "tsenv.mode": {
+        "tsdetect.mode": {
           "type": "string",
           "default": "auto",
           "markdownDescription": "How to setup `deno.enabled` and `tsserver.enabled`.\n\n- `\"auto\"`: Automatically switching `deno.enabled` and `tsserver.enabled` based on file environment. This is determined whether there is a node_modules directory in one of ancestor directories.\n- `\"deno\"`: Switching to deno.\n- `\"node\"` Switching to node. It sets up `tsserver.enabled`.\n-`\"manual\"`: \n",
