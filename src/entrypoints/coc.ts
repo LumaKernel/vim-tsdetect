@@ -1,11 +1,11 @@
-import { workspace, ExtensionContext } from "coc.nvim";
+import { workspace, ExtensionContext, commands } from "coc.nvim";
 import assert from "assert";
-import { dump } from "../debug";
+import { initializeDenoWorkspace, initializeNodeWorkspace } from "../commands";
 
-const EXTENSION_NS = "tsenv";
+const EXTENSION_NS = "tsdetect";
 
 export interface Settings {
-  mode: "auto" | "deno" | "node" | "manual";
+  mode: "auto" | "auto_user_config" | "auto_workspace_config" | "manual";
 }
 export const settingsKeys = ["mode"];
 
@@ -23,6 +23,49 @@ const getSettings = (): Settings => {
   return result;
 };
 
+export const switchUseConfig = async (
+  target: "node" | "deno",
+  mode: "auto_workspace_config" | "auto_user_config",
+) => {
+  const tsserverConfig = workspace.getConfiguration("tsserver");
+  tsserverConfig.update(
+    "enable",
+    target === "node",
+    mode === "auto_user_config",
+  );
+
+  const denoConfig = workspace.getConfiguration("deno");
+  denoConfig.update("enable", target === "deno", mode === "auto_user_config");
+
+  await commands.executeCommand("editor.action.restart");
+};
+
+const initialize = async (_context: ExtensionContext) => {
+  const settings = getSettings();
+  const proms: Promise<unknown>[] = [];
+
+  const setup = workspace.nvim.call("tsdetect#coc#setup_switch", [
+    settings.mode,
+  ]);
+
+  if (
+    settings.mode === "auto_user_config" ||
+    settings.mode === "auto_workspace_config"
+  ) {
+    proms.push(
+      workspace.nvim.call("tsdetect#coc#auto_config#switch", [settings.mode]),
+    );
+    proms.push(setup.then(() => workspace.nvim.call("tsdetect#init", [0])));
+  } else if (settings.mode === "auto") {
+    proms.push(workspace.nvim.call("tsdetect#coc#auto#switch"));
+    proms.push(setup.then(() => workspace.nvim.call("tsdetect#init", [1])));
+  } else {
+    proms.push(setup);
+  }
+
+  await Promise.all(proms);
+};
+
 export const activate = async (context: ExtensionContext) => {
   const rtp = await workspace.nvim.getOption("runtimepath");
   assert(typeof rtp === "string");
@@ -32,14 +75,35 @@ export const activate = async (context: ExtensionContext) => {
       `execute 'noautocmd set runtimepath^='.fnameescape('${context.extensionPath}')`,
     );
   }
-  await workspace.nvim.command("runtime plugin/tsenv.vim");
-  const settings = getSettings();
-  dump(9);
-  dump({ settings });
-  try {
-    await workspace.nvim.call("tsenv#coc#setup_switch", settings.mode, true);
-  } catch (e: unknown) {
-    dump(e);
-  }
-  dump(10);
+  await workspace.nvim.command("runtime plugin/tsdetect.vim");
+  context.subscriptions.push(
+    commands.registerCommand(
+      `${EXTENSION_NS}.deno.initializeWorkspace`,
+      initializeDenoWorkspace,
+    ),
+  );
+  context.subscriptions.push(
+    commands.registerCommand(
+      `${EXTENSION_NS}.node.initializeWorkspace`,
+      initializeNodeWorkspace,
+    ),
+  );
+  context.subscriptions.push(
+    workspace.onDidChangeConfiguration(async (evt) => {
+      if (evt.affectsConfiguration(EXTENSION_NS)) {
+        await initialize(context);
+      }
+    }),
+  );
+  (["auto_user_config", "auto_workspace_config"] as const).forEach((mode) => {
+    (["deno", "node"] as const).forEach((target) => {
+      context.subscriptions.push(
+        commands.registerCommand(
+          `${EXTENSION_NS}.${mode}.${target}.initializeWorkspace`,
+          () => switchUseConfig(target, mode),
+        ),
+      );
+    });
+  });
+  await initialize(context);
 };

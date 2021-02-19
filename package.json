@@ -17,7 +17,7 @@
     "build": "ts-node -r tsconfig-paths/register -T ./scripts/build.ts",
     "fix": "yarn lint --fix",
     "lint": "eslint --ext .js,.ts,.json .",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 2",
     "typecheck": "tsc --noEmit",
     "dev": "onchange -i \"**/*.ts\" \"tsconfig*.json\" -- yarn build"
   },
@@ -26,9 +26,46 @@
     "onLanguage:typescriptreact",
     "onLanguage:javascript",
     "onLanguage:javascriptreact",
-    "onCommand:deno.cache"
+    "onCommand:tsdetect.deno.initializeWorkspace",
+    "onCommand:tsdetect.node.initializeWorkspace",
+    "onCommand:tsdetect.auto_user_config.deno.initializeWorkspace",
+    "onCommand:tsdetect.auto_user_config.node.initializeWorkspace",
+    "onCommand:tsdetect.auto_workspace_config.deno.initializeWorkspace",
+    "onCommand:tsdetect.auto_workspace_config.node.initializeWorkspace"
   ],
   "contributes": {
+    "commands": [
+      {
+        "command": "tsdetect.deno.initializeWorkspace",
+        "title": "Initialize Deno Workspace Configuration",
+        "category": "Deno Language Server"
+      },
+      {
+        "command": "tsdetect.node.initializeWorkspace",
+        "title": "Initialize Node Workspace Configuration",
+        "category": "TypeScript Language Server"
+      },
+      {
+        "command": "tsdetect.auto_user_config.deno.initializeWorkspace",
+        "title": "Initialize Deno Silently In User Confiig",
+        "category": "Deno Language Server"
+      },
+      {
+        "command": "tsdetect.auto_user_config.node.initializeWorkspace",
+        "title": "Initialize Node Silently In User Confiig",
+        "category": "TypeScript Language Server"
+      },
+      {
+        "command": "tsdetect.auto_workspace_config.deno.initializeWorkspace",
+        "title": "Initialize Deno Silently In Workspace Confiig",
+        "category": "Deno Language Server"
+      },
+      {
+        "command": "tsdetect.auto_workspace_config.node.initializeWorkspace",
+        "title": "Initialize Node Silently In Workspace Confiig",
+        "category": "TypeScript Language Server"
+      }
+    ],
     "configuration": {
       "type": "object",
       "title": "coc.nvim TypeScript Detect",
@@ -36,17 +73,17 @@
         "tsdetect.mode": {
           "type": "string",
           "default": "auto",
-          "markdownDescription": "How to setup `deno.enabled` and `tsserver.enabled`.\n\n- `\"auto\"`: Automatically switching `deno.enabled` and `tsserver.enabled` based on file environment. This is determined whether there is a node_modules directory in one of ancestor directories.\n- `\"deno\"`: Switching to deno.\n- `\"node\"` Switching to node. It sets up `tsserver.enabled`.\n-`\"manual\"`: \n",
+          "markdownDescription": "How to setup `deno.enabled` and `tsserver.enabled`.\n\n- `\"auto\"` (default): Automatically switching `deno.enabled` and `tsserver.enabled` based on file environment. This is determined whether there is a node_modules directory in one of ancestor directories.\n- `\"auto_user_config\"`: TODO.\n- `\"auto_workspace_config\"`: TODO.\n- `\"manual\"`: coc-tsdetect won't do nothing.\n",
           "enum": [
             "auto",
-            "deno",
-            "node",
+            "auto_user_config",
+            "auto_workspace_config",
             "manual"
           ],
           "examples": [
             "auto",
-            "deno",
-            "node",
+            "auto_user_config",
+            "auto_workspace_config",
             "manual"
           ]
         }
@@ -56,6 +93,15 @@
   "dependencies": {
     "coc.nvim": "^0.0.80"
   },
+  "files": [
+    "autoload",
+    "doc",
+    "out",
+    "plugin",
+    "package.json",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
   "devDependencies": {
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/commit-analyzer": "^8.0.1",

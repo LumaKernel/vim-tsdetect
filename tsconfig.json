@@ -9,7 +9,7 @@
     "allowJs": true,
     "isolatedModules": false,
     "module": "CommonJS",
-    "target": "es2015",
+    "target": "es2019",
     "noEmit": true,
     "strict": true,
     "declaration": true,

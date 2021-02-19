@@ -3,11 +3,11 @@ name: Release
 on:
   push:
     branches:
-      - master
+      - main
       - alpha
   workflow_dispatch:
     branches:
-      - master
+      - main
       - alpha
 
 jobs:

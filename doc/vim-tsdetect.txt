@@ -1,4 +1,4 @@
-*coc-tsenv.txt*		Visualize existence of EOL at EOF
+*vim-tsdetect.txt*		Visualize existence of EOL at EOF
 
 Author : Luma <world@luma.email>
 License: MIT
@@ -6,31 +6,32 @@ VIM Support: >=8.2.0000
 NVIM Support: >=0.5.0-nightly
 
 ==============================================================================
-CONTENTS				*coc-tsenv-contents*
+CONTENTS				*vim-tsdetect-contents*
 
                                       Type |gO| to see the table of contents.
 
 ==============================================================================
-INTRODUCTION				*coc-tsenv-introduction*
+INTRODUCTION				*vim-tsdetect-introduction*
 
-*coc-tsenv* is TODO
+*vim-tsdetect* is TODO
+*coc-tsdetect* is TODO
 <
 	TODO
 >
 
 ==============================================================================
-INSTALLATION				*coc-tsenv-installation*
+INSTALLATION				*vim-tsdetect-installation*
 
 TODO
-|:CocInstall| coc-tsenv
+|:CocInstall| coc-tsdetect
 
 ==============================================================================
-OPTIONS					*coc-tsenv-options*
+OPTIONS					*vim-tsdetect-options*
 
 TODO
 
 ==============================================================================
-FUNCTIONS 				*coc-tsenv-functions*
+FUNCTIONS 				*vim-tsdetect-functions*
 
 TODO
 
