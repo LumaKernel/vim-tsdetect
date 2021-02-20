@@ -3,6 +3,8 @@ if exists('g:vim_tsdetect_loaded')
 endif
 let g:vim_tsdetect_loaded = 1
 
+call tsdetect#init()
+
 function! s:detect() abort
   if b:tsdetect_is_node
     doautocmd User tsdetect#detect#node

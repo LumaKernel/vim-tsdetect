@@ -8,11 +8,12 @@ const initialize = async (_context: ExtensionContext) => {
   const settings = getSettings();
   const proms: Promise<unknown>[] = [];
 
-  const setup = workspace.nvim.call("tsdetect#coc#setup_switch", [
-    settings.mode,
-    settings.configType,
-  ]);
-  proms.push(setup.then(() => workspace.nvim.call("tsdetect#init")));
+  proms.push(
+    workspace.nvim.call("tsdetect#coc#setup_switch", [
+      settings.mode,
+      settings.configType,
+    ]),
+  );
 
   if (settings.mode === "auto") {
     proms.push(
