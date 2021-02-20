@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/LumaKernel/vim-tsdetect/compare/v1.0.1...v2.0.0) (2021-02-20)
+
+
+### Features
+
+* change interfaces, config, and add some features. ([3826276](https://github.com/LumaKernel/vim-tsdetect/commit/3826276c53cb7b32fc42085fb54cfe13be44c697))
+
+
+### BREAKING CHANGES
+
+* `tsdetect.mode` are changed.
+
 ## [1.0.1](https://github.com/LumaKernel/vim-tsdetect/compare/v1.0.0...v1.0.1) (2021-02-19)
 
 

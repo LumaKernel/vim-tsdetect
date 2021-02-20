@@ -1,6 +1,6 @@
 {
   "name": "coc-tsdetect",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "coc.nvim extensions for detecting node and deno environment.",
   "keywords": [
     "deno",
@@ -135,12 +135,22 @@
           "items": {
             "type": "string"
           },
-          "default": [".ts", ".js"],
+          "default": [
+            ".ts",
+            ".js"
+          ],
           "markdownDescription": "Extensions added when using Node environment to `tsdetect.controlTrimSameExtsBase`.",
           "examples": [
             [],
-            [".ts", ".js"],
-            [".tsx", ".ts", ".js"]
+            [
+              ".ts",
+              ".js"
+            ],
+            [
+              ".tsx",
+              ".ts",
+              ".js"
+            ]
           ]
         },
         "tsdetect.controlTrimSameExtsDeno": {
