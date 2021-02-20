@@ -1,44 +1,12 @@
 import { workspace, ExtensionContext, commands } from "coc.nvim";
 import assert from "assert";
-import { initializeDenoWorkspace, initializeNodeWorkspace } from "../commands";
-
-const EXTENSION_NS = "tsdetect";
-
-export interface Settings {
-  mode: "auto" | "auto_user_config" | "auto_workspace_config" | "manual";
-}
-export const settingsKeys = ["mode"];
-
-const getSettings = (): Settings => {
-  const settings = workspace.getConfiguration(EXTENSION_NS);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const result: any = Object.create(null);
-  settingsKeys.forEach((key) => {
-    const value = settings.inspect(key);
-    assert(value);
-    result[key] =
-      value.workspaceValue ?? value.globalValue ?? value.defaultValue;
-  });
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  return result;
-};
-
-export const switchUseConfig = async (
-  target: "node" | "deno",
-  mode: "auto_workspace_config" | "auto_user_config",
-) => {
-  const tsserverConfig = workspace.getConfiguration("tsserver");
-  tsserverConfig.update(
-    "enable",
-    target === "node",
-    mode === "auto_user_config",
-  );
-
-  const denoConfig = workspace.getConfiguration("deno");
-  denoConfig.update("enable", target === "deno", mode === "auto_user_config");
-
-  await commands.executeCommand("editor.action.restart");
-};
+import { getSetConfig } from "../set_config";
+import {
+  configSwitch,
+  initializeDenoWorkspace,
+  initializeNodeWorkspace,
+} from "../commands";
+import { ConfigType, EXTENSION_NS, getSettings } from "../settings";
 
 const initialize = async (_context: ExtensionContext) => {
   const settings = getSettings();
@@ -46,19 +14,20 @@ const initialize = async (_context: ExtensionContext) => {
 
   const setup = workspace.nvim.call("tsdetect#coc#setup_switch", [
     settings.mode,
+    settings.configType,
   ]);
 
-  if (
-    settings.mode === "auto_user_config" ||
-    settings.mode === "auto_workspace_config"
-  ) {
+  if (settings.mode === "auto") {
     proms.push(
-      workspace.nvim.call("tsdetect#coc#auto_config#switch", [settings.mode]),
+      workspace.nvim.call(`tsdetect#coc#auto#switch_${settings.configType}`),
     );
-    proms.push(setup.then(() => workspace.nvim.call("tsdetect#init", [0])));
-  } else if (settings.mode === "auto") {
-    proms.push(workspace.nvim.call("tsdetect#coc#auto#switch"));
-    proms.push(setup.then(() => workspace.nvim.call("tsdetect#init", [1])));
+    proms.push(
+      setup.then(() =>
+        workspace.nvim.call("tsdetect#init", [
+          settings.configType === "ephemeral",
+        ]),
+      ),
+    );
   } else {
     proms.push(setup);
   }
@@ -67,6 +36,7 @@ const initialize = async (_context: ExtensionContext) => {
 };
 
 export const activate = async (context: ExtensionContext) => {
+  // Setup vim runtime settings as vim plugin.
   const rtp = await workspace.nvim.getOption("runtimepath");
   assert(typeof rtp === "string");
   const paths = rtp.split(",");
@@ -76,18 +46,22 @@ export const activate = async (context: ExtensionContext) => {
     );
   }
   await workspace.nvim.command("runtime plugin/tsdetect.vim");
+
+  // Setup manual commands.
   context.subscriptions.push(
     commands.registerCommand(
-      `${EXTENSION_NS}.deno.initializeWorkspace`,
+      `${EXTENSION_NS}.manual.deno.initializeWorkspace`,
       initializeDenoWorkspace,
     ),
   );
   context.subscriptions.push(
     commands.registerCommand(
-      `${EXTENSION_NS}.node.initializeWorkspace`,
+      `${EXTENSION_NS}.manual.node.initializeWorkspace`,
       initializeNodeWorkspace,
     ),
   );
+
+  // Re-initialize every time configurations are changed.
   context.subscriptions.push(
     workspace.onDidChangeConfiguration(async (evt) => {
       if (evt.affectsConfiguration(EXTENSION_NS)) {
@@ -95,15 +69,21 @@ export const activate = async (context: ExtensionContext) => {
       }
     }),
   );
-  (["auto_user_config", "auto_workspace_config"] as const).forEach((mode) => {
-    (["deno", "node"] as const).forEach((target) => {
-      context.subscriptions.push(
-        commands.registerCommand(
-          `${EXTENSION_NS}.${mode}.${target}.initializeWorkspace`,
-          () => switchUseConfig(target, mode),
-        ),
-      );
-    });
-  });
+
+  // Setup commands for automatic configuration.
+  (["ephemeral", "workspace", "user"] as const).forEach(
+    (configType: ConfigType) => {
+      (["deno", "node"] as const).forEach((target) => {
+        context.subscriptions.push(
+          commands.registerCommand(
+            `${EXTENSION_NS}.internal.${configType}.${target}.initializeWorkspace`,
+            () => configSwitch(target, getSetConfig(configType)),
+          ),
+        );
+      });
+    },
+  );
+
+  // Initialize after launched coc-tsdetect.
   await initialize(context);
 };

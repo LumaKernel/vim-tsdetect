@@ -2,12 +2,13 @@ function! tsdetect#util#is_node_shebang() abort
   let l:first_line = getline(1)
 
   " Shebang is used and 'deno' is included
-  if l:first_line =~# '^#!.*\<deno\>'
+  if l:first_line =~? '^#!\(.*[^a-z]\)\?deno\([^a-z]\|$\)'
     return 0
   endif
 
   " Shebang is used and 'node' is included
-  if l:first_line =~# '^#!.*\<node\>'
+  " Also supports like ts-node and ts-node-script
+  if l:first_line =~? '^#!\(.*[^a-z]\)\?node\([^a-z]\|$\)'
     return 1
   endif
 

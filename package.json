@@ -26,43 +26,55 @@
     "onLanguage:typescriptreact",
     "onLanguage:javascript",
     "onLanguage:javascriptreact",
-    "onCommand:tsdetect.deno.initializeWorkspace",
-    "onCommand:tsdetect.node.initializeWorkspace",
-    "onCommand:tsdetect.auto_user_config.deno.initializeWorkspace",
-    "onCommand:tsdetect.auto_user_config.node.initializeWorkspace",
-    "onCommand:tsdetect.auto_workspace_config.deno.initializeWorkspace",
-    "onCommand:tsdetect.auto_workspace_config.node.initializeWorkspace"
+    "onCommand:tsdetect.manual.deno.initializeWorkspace",
+    "onCommand:tsdetect.manual.node.initializeWorkspace",
+    "onCommand:tsdetect.internal.ephemeral.deno.initializeWorkspace",
+    "onCommand:tsdetect.internal.ephemeral.node.initializeWorkspace",
+    "onCommand:tsdetect.internal.workspace.deno.initializeWorkspace",
+    "onCommand:tsdetect.internal.workspace.node.initializeWorkspace",
+    "onCommand:tsdetect.internal.user.deno.initializeWorkspace",
+    "onCommand:tsdetect.internal.user.node.initializeWorkspace"
   ],
   "contributes": {
     "commands": [
       {
-        "command": "tsdetect.deno.initializeWorkspace",
+        "command": "tsdetect.manual.deno.initializeWorkspace",
         "title": "Initialize Deno Workspace Configuration",
         "category": "Deno Language Server"
       },
       {
-        "command": "tsdetect.node.initializeWorkspace",
+        "command": "tsdetect.manual.node.initializeWorkspace",
         "title": "Initialize Node Workspace Configuration",
         "category": "TypeScript Language Server"
       },
       {
-        "command": "tsdetect.auto_user_config.deno.initializeWorkspace",
-        "title": "Initialize Deno Silently In User Confiig",
+        "command": "tsdetect.internal.ephemeral.deno.initializeWorkspace",
+        "title": "Initialize Deno Silently Without Saving Config",
         "category": "Deno Language Server"
       },
       {
-        "command": "tsdetect.auto_user_config.node.initializeWorkspace",
-        "title": "Initialize Node Silently In User Confiig",
+        "command": "tsdetect.internal.ephemeral.node.initializeWorkspace",
+        "title": "Initialize Node Silently Without Saving Config",
         "category": "TypeScript Language Server"
       },
       {
-        "command": "tsdetect.auto_workspace_config.deno.initializeWorkspace",
-        "title": "Initialize Deno Silently In Workspace Confiig",
+        "command": "tsdetect.internal.user.deno.initializeWorkspace",
+        "title": "Initialize Deno Silently In User Config",
         "category": "Deno Language Server"
       },
       {
-        "command": "tsdetect.auto_workspace_config.node.initializeWorkspace",
-        "title": "Initialize Node Silently In Workspace Confiig",
+        "command": "tsdetect.internal.user.node.initializeWorkspace",
+        "title": "Initialize Node Silently In User Config",
+        "category": "TypeScript Language Server"
+      },
+      {
+        "command": "tsdetect.internal.workspace.deno.initializeWorkspace",
+        "title": "Initialize Deno Silently In Workspace Config",
+        "category": "Deno Language Server"
+      },
+      {
+        "command": "tsdetect.internal.workspace.node.initializeWorkspace",
+        "title": "Initialize Node Silently In Workspace Config",
         "category": "TypeScript Language Server"
       }
     ],
@@ -76,15 +88,70 @@
           "markdownDescription": "How to setup `deno.enabled` and `tsserver.enabled`.\n\n- `\"auto\"` (default): Automatically switching `deno.enabled` and `tsserver.enabled` based on file environment. This is determined whether there is a node_modules directory in one of ancestor directories.\n- `\"auto_user_config\"`: TODO.\n- `\"auto_workspace_config\"`: TODO.\n- `\"manual\"`: coc-tsdetect won't do nothing.\n",
           "enum": [
             "auto",
-            "auto_user_config",
-            "auto_workspace_config",
             "manual"
           ],
           "examples": [
             "auto",
-            "auto_user_config",
-            "auto_workspace_config",
             "manual"
+          ]
+        },
+        "tsdetect.configType": {
+          "type": "string",
+          "default": "ephemeral",
+          "markdownDescription": "Determine how configuration changed automatically.\n\n",
+          "enum": [
+            "ephemeral",
+            "workspace",
+            "user"
+          ],
+          "examples": [
+            "ephemeral",
+            "workspace",
+            "user"
+          ]
+        },
+        "tsdetect.controlTrimSameExts": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Whether to control coc.source.file.trimSameExts.",
+          "examples": [
+            true,
+            false
+          ]
+        },
+        "tsdetect.controlTrimSameExtsBase": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "markdownDescription": "When controlling coc.source.file.trimSameExts, these values are used as base.",
+          "examples": [
+            []
+          ]
+        },
+        "tsdetect.controlTrimSameExtsNode": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [".ts", ".js"],
+          "markdownDescription": "Extensions added when using Node environment to `tsdetect.controlTrimSameExtsBase`.",
+          "examples": [
+            [],
+            [".ts", ".js"],
+            [".tsx", ".ts", ".js"]
+          ]
+        },
+        "tsdetect.controlTrimSameExtsDeno": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "markdownDescription": "Extensions added when using Deno environment to `tsdetect.controlTrimSameExtsBase`. Maybe you would love to keep it default.",
+          "examples": [
+            []
           ]
         }
       }
