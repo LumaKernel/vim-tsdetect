@@ -1,11 +1,7 @@
 import { workspace, ExtensionContext, commands } from "coc.nvim";
 import assert from "assert";
 import { getSetConfig } from "../set_config";
-import {
-  configSwitch,
-  initializeDenoWorkspace,
-  initializeNodeWorkspace,
-} from "../commands";
+import { configSwitch, manualInitializeWorkspace } from "../commands";
 import { ConfigType, EXTENSION_NS, getSettings } from "../settings";
 
 const initialize = async (_context: ExtensionContext) => {
@@ -48,18 +44,14 @@ export const activate = async (context: ExtensionContext) => {
   await workspace.nvim.command("runtime plugin/tsdetect.vim");
 
   // Setup manual commands.
-  context.subscriptions.push(
-    commands.registerCommand(
-      `${EXTENSION_NS}.manual.deno.initializeWorkspace`,
-      initializeDenoWorkspace,
-    ),
-  );
-  context.subscriptions.push(
-    commands.registerCommand(
-      `${EXTENSION_NS}.manual.node.initializeWorkspace`,
-      initializeNodeWorkspace,
-    ),
-  );
+  (["deno", "node"] as const).forEach((target) => {
+    context.subscriptions.push(
+      commands.registerCommand(
+        `${EXTENSION_NS}.manual.${target}.initializeWorkspace`,
+        () => manualInitializeWorkspace(target),
+      ),
+    );
+  });
 
   // Re-initialize every time configurations are changed.
   context.subscriptions.push(
@@ -71,18 +63,18 @@ export const activate = async (context: ExtensionContext) => {
   );
 
   // Setup commands for automatic configuration.
-  (["ephemeral", "workspace", "user"] as const).forEach(
-    (configType: ConfigType) => {
-      (["deno", "node"] as const).forEach((target) => {
+  (["deno", "node"] as const).forEach((target) => {
+    (["ephemeral", "workspace", "user"] as const).forEach(
+      (configType: ConfigType) => {
         context.subscriptions.push(
           commands.registerCommand(
             `${EXTENSION_NS}.internal.${configType}.${target}.initializeWorkspace`,
             () => configSwitch(target, getSetConfig(configType)),
           ),
         );
-      });
-    },
-  );
+      },
+    );
+  });
 
   // Initialize after launched coc-tsdetect.
   await initialize(context);
