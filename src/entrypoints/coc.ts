@@ -12,20 +12,12 @@ const initialize = async (_context: ExtensionContext) => {
     settings.mode,
     settings.configType,
   ]);
+  proms.push(setup.then(() => workspace.nvim.call("tsdetect#init")));
 
   if (settings.mode === "auto") {
     proms.push(
       workspace.nvim.call(`tsdetect#coc#auto#switch_${settings.configType}`),
     );
-    proms.push(
-      setup.then(() =>
-        workspace.nvim.call("tsdetect#init", [
-          settings.configType === "ephemeral",
-        ]),
-      ),
-    );
-  } else {
-    proms.push(setup);
   }
 
   await Promise.all(proms);
