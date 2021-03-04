@@ -1,8 +1,15 @@
 {
   "name": "coc-tsdetect",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "coc.nvim extensions for detecting node and deno environment.",
-  "keywords": ["deno", "typescript", "javascript", "neovim", "vim", "coc.nvim"],
+  "keywords": [
+    "deno",
+    "typescript",
+    "javascript",
+    "neovim",
+    "vim",
+    "coc.nvim"
+  ],
   "license": "MIT",
   "author": "Luma",
   "main": "./out/coc.js",
@@ -55,24 +62,39 @@
           "type": "string",
           "default": "auto",
           "markdownDescription": "How to setup `deno.enabled` and `tsserver.enabled`.\n\n- `\"auto\"` (default): Automatically switching `deno.enabled` and `tsserver.enabled` based on file environment. This is determined whether there is a node_modules directory in one of ancestor directories.\n- `\"auto_user_config\"`: TODO.\n- `\"auto_workspace_config\"`: TODO.\n- `\"manual\"`: coc-tsdetect won't do nothing.\n",
-          "enum": ["auto", "manual"],
-          "examples": ["auto", "manual"]
+          "enum": [
+            "auto",
+            "manual"
+          ],
+          "examples": [
+            "auto",
+            "manual"
+          ]
         },
         "tsdetect.doNotCreateOnNode": {
           "type": "boolean",
           "default": true,
-          "examples": [false, true]
+          "examples": [
+            false,
+            true
+          ]
         },
         "tsdetect.doNothingIfConfigExists": {
           "type": "boolean",
           "default": true,
-          "examples": [false, true]
+          "examples": [
+            false,
+            true
+          ]
         },
         "tsdetect.nodeOverride": {
           "type": "object",
           "default": {
             "deno.lint": false,
-            "coc.source.file.trimSameExts": [".js", ".ts"],
+            "coc.source.file.trimSameExts": [
+              ".js",
+              ".ts"
+            ],
             "prettier.disableLanguage": []
           },
           "examples": [

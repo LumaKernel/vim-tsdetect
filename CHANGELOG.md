@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/LumaKernel/vim-tsdetect/compare/v2.1.0...v3.0.0) (2021-03-04)
+
+
+### Features
+
+* lessen restarts, stabilize, and more opinionated defaults ([#2](https://github.com/LumaKernel/vim-tsdetect/issues/2)) ([6393324](https://github.com/LumaKernel/vim-tsdetect/commit/6393324e4992ca006e8851a6c62bdf991f0e6827))
+
+
+### BREAKING CHANGES
+
+* Only left workspace configuration target.
+
 # [2.1.0](https://github.com/LumaKernel/vim-tsdetect/compare/v2.0.0...v2.1.0) (2021-02-20)
 
 
