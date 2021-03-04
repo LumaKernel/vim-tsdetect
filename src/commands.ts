@@ -1,55 +1,62 @@
-import { commands, window } from "coc.nvim";
+import { commands, window, workspace } from "coc.nvim";
+import { ConfigurationTarget } from "./coc_internal";
 import { setConfigWorkspace } from "./set_config";
-import { getSettings, Settings } from "./settings";
+import { getSettings, Settings, TsRuntime } from "./settings";
 
-const createTrimSameExts = (settings: Settings, target: "node" | "deno") => {
-  return [
-    ...settings.controlTrimSameExtsBase,
-    ...(target === "node"
-      ? settings.controlTrimSameExtsNode
-      : settings.controlTrimSameExtsDeno),
-  ];
+const configure = async (runtime: TsRuntime, settings: Settings) => {
+  await setConfigWorkspace("tsserver", "enable", runtime === "node");
+  await setConfigWorkspace("deno", "enable", runtime === "deno");
+  await commands.executeCommand("editor.action.restart");
+  const override =
+    runtime === "node" ? settings.nodeOverride : settings.denoOverride;
+
+  /* eslint-disable no-restricted-syntax,no-await-in-loop,no-continue */
+  for (const key of Object.keys(override)) {
+    const ns = key.split(".");
+    const nsKey = ns.pop();
+    if (typeof nsKey !== "string") {
+      await window.showWarningMessage(
+        `Override key '${key}' does not include any dots.`,
+      );
+      continue;
+    }
+    await setConfigWorkspace(ns.join("."), nsKey, override[key]);
+  }
+  /* eslint-enable no-restricted-syntax,no-await-in-loop,no-continue */
 };
 
-export const manualInitializeWorkspace = async (target: "node" | "deno") => {
-  const settings = getSettings();
+export const manualInitializeWorkspace = async (runtime: TsRuntime) => {
   await setConfigWorkspace("tsdetect", "mode", "manual");
+  const settings = getSettings();
 
-  if (target === "node") {
-    await setConfigWorkspace("tsserver", "enable", true);
-    await setConfigWorkspace("deno", "enable", false);
-  } else {
-    await commands.executeCommand("deno.initializeWorkspace");
-  }
+  await configure(runtime, settings);
 
   await commands.executeCommand("editor.action.restart");
 
   await window.showInformationMessage(
-    `${target === "node" ? "Node" : "Deno"} workspace settings configured!`,
+    `${runtime === "node" ? "Node" : "Deno"} workspace settings configured!`,
   );
-
-  if (settings.controlTrimSameExts) {
-    await setConfigWorkspace(
-      "coc.source.file",
-      "trimSameExts",
-      createTrimSameExts(settings, target),
-    );
-  }
 };
 
-export const configSwitch = async (
-  target: "node" | "deno",
-  setConfig: (ns: string, key: string, value: unknown) => Promise<void>,
-) => {
+export const autoInitializeWorkspace = async (runtime: TsRuntime) => {
+  const workspaceConfigFile = workspace.getConfigFile(
+    ConfigurationTarget.Workspace,
+  );
   const settings = getSettings();
-  await setConfig("tsserver", "enable", target === "node");
-  await setConfig("deno", "enable", target === "deno");
-  if (settings.controlTrimSameExts) {
-    await setConfig(
-      "coc.source.file",
-      "trimSameExts",
-      createTrimSameExts(settings, target),
-    );
-  }
+  const exists = typeof workspaceConfigFile === "string";
+
+  if (settings.doNothingIfConfigExists && exists) return;
+  if (settings.doNotCreateOnNode && runtime === "node" && !exists) return;
+
+  const tsserverConfig = workspace.getConfiguration("tsserver");
+  const denoConfig = workspace.getConfiguration("deno");
+
+  if (exists && tsserverConfig.get("enable") && runtime === "node") return;
+  if (exists && denoConfig.get("enable") && runtime === "deno") return;
+
+  await configure(runtime, settings);
   await commands.executeCommand("editor.action.restart");
+  await workspace.nvim.command(
+    `doautocmd User tsdetect#coc#auto#switch#${runtime}#after`,
+  );
 };
