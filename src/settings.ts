@@ -3,23 +3,24 @@ import assert from "assert";
 
 export const EXTENSION_NS = "tsdetect";
 
-export type ConfigType = "ephemeral" | "user" | "workspace";
+export type TsRuntime = "node" | "deno";
 
 export interface Settings {
+  /** @default "auto" */
   mode: "auto" | "manual";
-  configType: ConfigType;
-  controlTrimSameExts: boolean;
-  controlTrimSameExtsBase: string[];
-  controlTrimSameExtsNode: string[];
-  controlTrimSameExtsDeno: string[];
+  /** @default true */
+  doNotCreateOnNode: boolean;
+  /** @default true */
+  doNothingIfConfigExists: boolean;
+  denoOverride: { [key: string]: unknown };
+  nodeOverride: { [key: string]: unknown };
 }
 export const settingsKeys = [
   "mode",
-  "configType",
-  "controlTrimSameExts",
-  "controlTrimSameExtsBase",
-  "controlTrimSameExtsNode",
-  "controlTrimSameExtsDeno",
+  "doNotCreateOnNode",
+  "doNothingIfConfigExists",
+  "denoOverride",
+  "nodeOverride",
 ];
 
 export const getSettings = (): Settings => {

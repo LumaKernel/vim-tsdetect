@@ -2,14 +2,7 @@
   "name": "coc-tsdetect",
   "version": "2.1.0",
   "description": "coc.nvim extensions for detecting node and deno environment.",
-  "keywords": [
-    "deno",
-    "typescript",
-    "javascript",
-    "neovim",
-    "vim",
-    "coc.nvim"
-  ],
+  "keywords": ["deno", "typescript", "javascript", "neovim", "vim", "coc.nvim"],
   "license": "MIT",
   "author": "Luma",
   "main": "./out/coc.js",
@@ -28,12 +21,8 @@
     "onLanguage:javascriptreact",
     "onCommand:tsdetect.manual.deno.initializeWorkspace",
     "onCommand:tsdetect.manual.node.initializeWorkspace",
-    "onCommand:tsdetect.internal.ephemeral.deno.initializeWorkspace",
-    "onCommand:tsdetect.internal.ephemeral.node.initializeWorkspace",
-    "onCommand:tsdetect.internal.workspace.deno.initializeWorkspace",
-    "onCommand:tsdetect.internal.workspace.node.initializeWorkspace",
-    "onCommand:tsdetect.internal.user.deno.initializeWorkspace",
-    "onCommand:tsdetect.internal.user.node.initializeWorkspace"
+    "onCommand:tsdetect.internal.deno.initializeWorkspace",
+    "onCommand:tsdetect.internal.node.initializeWorkspace"
   ],
   "contributes": {
     "commands": [
@@ -48,32 +37,12 @@
         "category": "TypeScript Language Server"
       },
       {
-        "command": "tsdetect.internal.ephemeral.deno.initializeWorkspace",
-        "title": "Initialize Deno Silently Without Saving Config",
-        "category": "Deno Language Server"
-      },
-      {
-        "command": "tsdetect.internal.ephemeral.node.initializeWorkspace",
-        "title": "Initialize Node Silently Without Saving Config",
-        "category": "TypeScript Language Server"
-      },
-      {
-        "command": "tsdetect.internal.user.deno.initializeWorkspace",
-        "title": "Initialize Deno Silently In User Config",
-        "category": "Deno Language Server"
-      },
-      {
-        "command": "tsdetect.internal.user.node.initializeWorkspace",
-        "title": "Initialize Node Silently In User Config",
-        "category": "TypeScript Language Server"
-      },
-      {
-        "command": "tsdetect.internal.workspace.deno.initializeWorkspace",
+        "command": "tsdetect.internal.deno.initializeWorkspace",
         "title": "Initialize Deno Silently In Workspace Config",
         "category": "Deno Language Server"
       },
       {
-        "command": "tsdetect.internal.workspace.node.initializeWorkspace",
+        "command": "tsdetect.internal.node.initializeWorkspace",
         "title": "Initialize Node Silently In Workspace Config",
         "category": "TypeScript Language Server"
       }
@@ -86,82 +55,47 @@
           "type": "string",
           "default": "auto",
           "markdownDescription": "How to setup `deno.enabled` and `tsserver.enabled`.\n\n- `\"auto\"` (default): Automatically switching `deno.enabled` and `tsserver.enabled` based on file environment. This is determined whether there is a node_modules directory in one of ancestor directories.\n- `\"auto_user_config\"`: TODO.\n- `\"auto_workspace_config\"`: TODO.\n- `\"manual\"`: coc-tsdetect won't do nothing.\n",
-          "enum": [
-            "auto",
-            "manual"
-          ],
-          "examples": [
-            "auto",
-            "manual"
-          ]
+          "enum": ["auto", "manual"],
+          "examples": ["auto", "manual"]
         },
-        "tsdetect.configType": {
-          "type": "string",
-          "default": "ephemeral",
-          "markdownDescription": "Determine how configuration changed automatically.\n\n",
-          "enum": [
-            "ephemeral",
-            "workspace",
-            "user"
-          ],
-          "examples": [
-            "ephemeral",
-            "workspace",
-            "user"
-          ]
-        },
-        "tsdetect.controlTrimSameExts": {
+        "tsdetect.doNotCreateOnNode": {
           "type": "boolean",
           "default": true,
-          "markdownDescription": "Whether to control coc.source.file.trimSameExts.",
+          "examples": [false, true]
+        },
+        "tsdetect.doNothingIfConfigExists": {
+          "type": "boolean",
+          "default": true,
+          "examples": [false, true]
+        },
+        "tsdetect.nodeOverride": {
+          "type": "object",
+          "default": {
+            "deno.lint": false,
+            "coc.source.file.trimSameExts": [".js", ".ts"],
+            "prettier.disableLanguage": []
+          },
           "examples": [
-            true,
-            false
+            {}
           ]
         },
-        "tsdetect.controlTrimSameExtsBase": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "default": [],
-          "markdownDescription": "When controlling coc.source.file.trimSameExts, these values are used as base.",
-          "examples": [
-            []
-          ]
-        },
-        "tsdetect.controlTrimSameExtsNode": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "default": [
-            ".ts",
-            ".js"
-          ],
-          "markdownDescription": "Extensions added when using Node environment to `tsdetect.controlTrimSameExtsBase`.",
-          "examples": [
-            [],
-            [
-              ".ts",
-              ".js"
-            ],
-            [
-              ".tsx",
-              ".ts",
-              ".js"
+        "tsdetect.denoOverride": {
+          "type": "object",
+          "default": {
+            "deno.lint": true,
+            "coc.source.file.trimSameExts": [],
+            "prettier.disableLanguage": [
+              "javascript",
+              "javascriptreact",
+              "typescript",
+              "typescriptreact"
             ]
-          ]
-        },
-        "tsdetect.controlTrimSameExtsDeno": {
-          "type": "array",
-          "items": {
-            "type": "string"
           },
-          "default": [],
-          "markdownDescription": "Extensions added when using Deno environment to `tsdetect.controlTrimSameExtsBase`. Maybe you would love to keep it default.",
           "examples": [
-            []
+            {},
+            {
+              "deno.unstable": true
+            }
           ]
         }
       }
