@@ -1,0 +1,14 @@
+codecov:
+  require_ci_to_pass: true
+
+coverage:
+  precision: 2
+  round: down
+  status:
+    default:
+      target: 0%
+
+comment:
+  layout: "reach,diff,flags,files,footer"
+  behavior: new
+  require_changes: false
