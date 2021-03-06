@@ -1,3 +1,10 @@
+## [3.0.3](https://github.com/LumaKernel/vim-tsdetect/compare/v3.0.2...v3.0.3) (2021-03-06)
+
+
+### Bug Fixes
+
+* **readme:** fix new lines in markdown ([b3dc54e](https://github.com/LumaKernel/vim-tsdetect/commit/b3dc54e694b9272bd3f88f4081d9597a701692d3))
+
 ## [3.0.2](https://github.com/LumaKernel/vim-tsdetect/compare/v3.0.1...v3.0.2) (2021-03-06)
 
 
