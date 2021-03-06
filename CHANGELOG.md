@@ -1,3 +1,10 @@
+## [3.0.2](https://github.com/LumaKernel/vim-tsdetect/compare/v3.0.1...v3.0.2) (2021-03-06)
+
+
+### Bug Fixes
+
+* unnecessary line ([476d107](https://github.com/LumaKernel/vim-tsdetect/commit/476d107553f3b05621f0bf18c9ac4d77890bba30))
+
 ## [3.0.1](https://github.com/LumaKernel/vim-tsdetect/compare/v3.0.0...v3.0.1) (2021-03-06)
 
 
