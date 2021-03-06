@@ -1,5 +1,6 @@
 import path from "path";
 import fs from "fs";
+import { execFileSync } from "child_process";
 import { parseReadmeMd } from "../src/utils/readme";
 import { applyOptionDeclarations } from "../src/utils/package-json";
 
@@ -20,3 +21,5 @@ fs.writeFileSync(
   packageJsonPath,
   JSON.stringify(appliedJson as any, null, "  "),
 );
+
+execFileSync("yarn", ["fix", "./package.json"]);
