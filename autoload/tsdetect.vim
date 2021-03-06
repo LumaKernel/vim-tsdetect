@@ -10,7 +10,7 @@ function! tsdetect#init() abort
       doautocmd User tsdetect#detect
     else
       let l:is_node_shebang = tsdetect#util#is_node_shebang()
-      if l:is_node_shebang != v:null
+      if l:is_node_shebang isnot v:null
         let b:tsdetect_is_node = l:is_node_shebang
         doautocmd User tsdetect#detect
       endif
