@@ -14,18 +14,18 @@ Run `:CocInsatll coc-tsdetect` in vim/neovim or install `vim-tsdetect` with your
 
 Checking following in order.
 
-1. If buffer name starts with `deno:/` -> **deno**
-2. If buffer name ends with `.js`, `.ts`, `.tsx` -> check following in order
-  a. Shebang is present and including `node` -> **node**
-  b. Shebang is present and including `deno` -> **deno**
-  c. `node_modules/` directory is found in ancestors of (following) -> **node**
-    - If buffer name is not empty, search from that path.
-    - Otherwise, search from current working directory.
-  d. Otherwise. -> **deno**
-3. -> Check following in order
-  a. Shebang is present and including `node` -> **node**
-  b. Shebang is present and including `deno` -> **deno**
-4. Otherwise, nothing is detected.
+1. If buffer name starts with `deno:/` -> **deno**  
+2. If buffer name ends with `.js`, `.ts`, `.tsx` -> check following in order  
+    a. Shebang is present and including `node` -> **node**  
+    b. Shebang is present and including `deno` -> **deno**  
+    c. `node_modules/` directory is found in ancestors of (following) -> **node**  
+        - If buffer name is not empty, search from that path.  
+        - Otherwise, search from current working directory.  
+    d. Otherwise. -> **deno**  
+3. -> Check following in order  
+    a. Shebang is present and including `node` -> **node**  
+    b. Shebang is present and including `deno` -> **deno**  
+4. Otherwise, nothing is detected.  
 
 ## When does this try to detect?
 
