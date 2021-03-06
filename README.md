@@ -30,6 +30,7 @@ Checking following in order.
 ## When does this try to detect?
 
 This tries to detect when following events occured.
+
 - `FileType javascript,javascriptreact,typescript,typescript.tsx,typescriptreact`
 - `BufEnter,BufNewFile,BufWritePost *`
 
@@ -42,6 +43,7 @@ Please configure following if necessary by `:CocConfig`.
 Set this `"manual"` to disable auto initialization. Variable `b:tsdetect_is_node` remains avaiable.
 
 Values: `"auto" | "manual"`
+
 Default:
 
 ```json
@@ -55,6 +57,7 @@ Default:
 By default, in Node.js environment, tsdetect does not create a workspace configuration (`.vim/coc-settings.json`). Set this `false` to create configuration file whether the configuration exists.
 
 Values: `boolean`
+
 Default:
 
 ```json
@@ -69,6 +72,7 @@ By default, tsdetect does not touch a workspace configuration (`.vim/coc-setting
 
 
 Values: `boolean`
+
 Default:
 
 ```json
@@ -82,6 +86,7 @@ Default:
 Workspace configuration to be set in Node.js environtment. If you want to extend original configuration, you need to include default ones. Not recommended to touch `deno.enable` and `tsserver.enable`.
 
 Values: `object`
+
 Default:
 
 ```json
@@ -102,6 +107,7 @@ Default:
 Workspace configuration to be set in Deno environtment. If you want to extend original configuration, you need to include default ones. Not recommended not to touch `deno.enable` and `tsserver.enable`.
 
 Values: `object`
+
 Default:
 
 ```json
