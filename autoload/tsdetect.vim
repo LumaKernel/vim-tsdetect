@@ -5,7 +5,7 @@ function! tsdetect#init() abort
   endfunction
 
   function! s:detect_buffer(amatch) abort
-    if a:amatch =~? '^deno:/\|\.tsx\?\|\.js$'
+    if a:amatch =~? '^deno:/\|\.tsx\?$\|\.js$'
       let b:tsdetect_is_node = tsdetect#util#is_node()
       doautocmd User tsdetect#detect
     else
