@@ -17,7 +17,7 @@ endfunction
 
 function! tsdetect#util#is_node() abort
   let l:is_node_shebang = tsdetect#util#is_node_shebang()
-  if l:is_node_shebang != v:null
+  if l:is_node_shebang isnot v:null
     return l:is_node_shebang
   endif
 
