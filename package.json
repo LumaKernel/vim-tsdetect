@@ -14,12 +14,14 @@
   "author": "Luma",
   "main": "./out/coc.js",
   "scripts": {
-    "build": "ts-node -r tsconfig-paths/register -T ./scripts/build.ts",
+    "build": "yarn ts-node-run ./scripts/build.ts",
+    "coverage": "jest --coverage",
+    "dev": "onchange -i \"**/*.ts\" \"tsconfig*.json\" -- yarn build",
     "fix": "yarn lint --fix",
     "lint": "eslint --ext .js,.ts,.json .",
     "test": "jest",
-    "typecheck": "tsc --noEmit",
-    "dev": "onchange -i \"**/*.ts\" \"tsconfig*.json\" -- yarn build"
+    "ts-node-run": "ts-node -r tsconfig-paths/register -T",
+    "typecheck": "tsc --noEmit"
   },
   "activationEvents": [
     "onLanguage:typescript",
