@@ -1,7 +1,6 @@
 for [s:node, s:deno] in [["node", "deno"], ["deno", "node"]]
   execute join([
   \   printf("function! tsdetect#coc#auto#switch_%s() abort", s:node),
-  \   printf("  doautocmd User tsdetect#coc#auto#swtich#%s#before", s:node),
   \   printf("  let g:tsdetect#coc#auto#switched_%s = 1", s:node),
   \   printf("  let g:tsdetect#coc#auto#switched_%s = 0", s:deno),
   \   printf("  CocCommand tsdetect.internal.%s.initializeWorkspace", s:node),
