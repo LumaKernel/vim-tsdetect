@@ -17,7 +17,7 @@
     "build": "ts-node -r tsconfig-paths/register -T ./scripts/build.ts",
     "fix": "yarn lint --fix",
     "lint": "eslint --ext .js,.ts,.json .",
-    "test": "echo \"Error: no test specified\" && exit 2",
+    "test": "jest",
     "typecheck": "tsc --noEmit",
     "dev": "onchange -i \"**/*.ts\" \"tsconfig*.json\" -- yarn build"
   },
