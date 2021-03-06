@@ -1,7 +1,7 @@
 # vim-tsdetect
 
 [![npm](https://img.shields.io/npm/v/coc-tsdetect?style=flat-square)](https://www.npmjs.com/package/coc-tsdetect)
-[![GitHub Workflow Status - Release](https://img.shields.io/github/workflow/status/LumaKernel/vim-tsdetect/Release?style=flat-square)](https://github.com/LumaKernel/vim-tsdetect/actions/workflows/ci.yml?query=branch%3Amain)
+[![GitHub Workflow Status - CI](https://img.shields.io/github/workflow/status/LumaKernel/vim-tsdetect/CI?style=flat-square)](https://github.com/LumaKernel/vim-tsdetect/actions/workflows/ci.yml?query=branch%3Amain)
 [![Codecov](https://img.shields.io/codecov/c/github/LumaKernel/vim-tsdetect?style=flat-square)](https://app.codecov.io/gh/LumaKernel/vim-tsdetect)
 
 `vim-tsdetect`/`coc-tsdetect` provides [vim](https://github.com/vim/vim)/[neovim](https://github.com/neovim/neovim) and [`coc.nvim`](https://github.com/neoclide/coc.nvim) extension to initialize workspace automatically for [`coc-tsserver`](https://github.com/neoclide/coc-tsserver) and [`coc-deno`](https://github.com/fannheyward/coc-deno).
