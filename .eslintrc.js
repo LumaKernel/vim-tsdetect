@@ -1,3 +1,6 @@
+const path = require('path');
+
+/** @type import("eslint").parserOptions */
 module.exports = {
   ignorePatterns: [],
 
@@ -24,7 +27,7 @@ module.exports = {
     {
       files: '*.ts',
 
-      parserOptions: { project: './tsconfig.json' },
+      parserOptions: { project: path.resolve(__dirname, 'tsconfig.json') },
 
       extends: [
         'airbnb-base-typescript-prettier',
@@ -66,6 +69,15 @@ module.exports = {
       },
     },
     {
+      // test files
+      files: [
+        'tests/**/*.ts',
+        '*.test.ts',
+        '*.spec.ts',
+      ],
+      plugins: ['jest'],
+    },
+    {
       // dev ts files
       files: [
         'tests/**/*.ts',
@@ -79,6 +91,12 @@ module.exports = {
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-var-requires': 'off',
         'import/no-dynamic-require': 'off',
+      },
+    },
+    {
+      files: ['*.js'],
+      rules: {
+        'import/order': 'off',
       },
     },
   ],
