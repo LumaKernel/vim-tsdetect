@@ -1,3 +1,12 @@
+## [3.0.1](https://github.com/LumaKernel/vim-tsdetect/compare/v3.0.0...v3.0.1) (2021-03-06)
+
+
+### Bug Fixes
+
+* **vimscript:** fix buffer filename matching pattern ([c1df194](https://github.com/LumaKernel/vim-tsdetect/commit/c1df1949c5bc9b44801f31aba77d848ef304752f))
+* **vimscript:** null check correctly ([6670a75](https://github.com/LumaKernel/vim-tsdetect/commit/6670a7559784986a569021ac84d0dce1f9576b28))
+* remove user events for tsdetect#coc#auto#swtich#%s#before ([098edb5](https://github.com/LumaKernel/vim-tsdetect/commit/098edb56f2c367c0cc41d76583863fbf0dc75230))
+
 # [3.0.0](https://github.com/LumaKernel/vim-tsdetect/compare/v2.1.0...v3.0.0) (2021-03-04)
 
 
