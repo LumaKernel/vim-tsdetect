@@ -1,4 +1,4 @@
-*vim-tsdetect.txt*		Visualize existence of EOL at EOF
+*vim-tsdetect.txt*			     Visualize existence of EOL at EOF
 
 Author : Luma <world@luma.email>
 License: MIT
@@ -6,34 +6,211 @@ VIM Support: >=8.2.0000
 NVIM Support: >=0.5.0-nightly
 
 ==============================================================================
-CONTENTS				*vim-tsdetect-contents*
+CONTENTS					       *vim-tsdetect-contents*
 
                                       Type |gO| to see the table of contents.
 
 ==============================================================================
-INTRODUCTION				*vim-tsdetect-introduction*
+INTRODUCTION					   *vim-tsdetect-introduction*
 
-*vim-tsdetect* is TODO
-*coc-tsdetect* is TODO
+*vim-tsdetect* / *coc-tsdetect* is vim plugins / coc-extension to initialize
+workspace for coc-tsserver(https://github.com/neoclide/coc-tsserver) and
+coc-deno(https://github.com/fannheyward/coc-deno).
+
+==============================================================================
+INSTALLATION					   *vim-tsdetect-installation*
+
+Run |:CocInstall| `coc-tsdetect` in vim/neovim or install `vim-tsdetect`
+with your favorite plugin manager and build with `yarn && yarn build`. It is
+enought to install one of them.
+
+==============================================================================
+IMPLEMENTATION DETAILS			 *vim-tsdetect-implementation-details*
+
+------------------------------------------------------------------------------
+How does this detect TS environments?
+
+Checking following in order.
+
+1. If buffer name starts with `deno:/` -> deno
+2. If buffer name ends with `.js`, `.ts`, `.tsx` -> check following in order
+  a. Shebang is present and including `node` -> node
+  b. Shebang is present and including `deno` -> deno
+  c. `node_modules/` directory is found in ancestors of (following) -> node
+    - If buffer name is not empty, search from that path.
+    - Otherwise, search from current working directory.
+  d. Otherwise. -> deno
+3. -> Check following in order
+  a. Shebang is present and including `node` -> node
+  b. Shebang is present and including `deno` -> deno
+4. Otherwise, nothing is detected.
+
+------------------------------------------------------------------------------
+When does this try to detect?
+
+This tries to detect when following events occured.
+- |FileType| `javascript,javascriptreact,typescript,typescript.tsx,typescriptreact`
+- |BufEnter|,|BufNewFile|,|BufWritePost| `*`
+
+==============================================================================
+OPTIONS							*vim-tsdetect-options*
+
+Please configure following if necessary by `:CocConfig`.
+
+------------------------------------------------------------------------------
+					  *vim-tsdetect-options_tsdetect.mode*
+
+Set this `"manual"` to disable auto initialization. Variable
+|b:tsdetect_is_node| remains avaiable.
+
+Values: `"auto" | "manual"`
+Default: >
+	{
+	    "tsdetect.mode": "auto"
+	}
 <
-	TODO
->
+
+------------------------------------------------------------------------------
+			     *vim-tsdetect-options_tsdetect.doNotCreateOnNode*
+
+By default, in Node.js environment, tsdetect does not create a workspace 
+configuration (`.vim/coc-settings.json`). Set this `false` to create 
+configuration file whether the configuration exists.
+
+Values: `boolean`
+Default: >
+	{
+	    "tsdetect.doNotCreateOnNode": true
+	}
+<
+
+------------------------------------------------------------------------------
+		*vim-tsdetect-options_tsdetect.doNothingIfConfigExists*
+
+By default, in Node.js environment, tsdetect does not create a workspace 
+configuration (`.vim/coc-settings.json`). Set this `false` to create 
+configuration file whether the configuration exists.
+
+Values: `boolean`
+Default: >
+	{
+	    "tsdetect.doNothingIfConfigExists": true
+	}
+<
+
+------------------------------------------------------------------------------
+				  *vim-tsdetect-options_tsdetect.nodeOverride*
+
+Workspace configuration to be set in Node.js environtment. If you want to
+extend original configuration, you need to include default ones. Not
+recommended to touch `deno.enable` and `tsserver.enable`.
+
+Values: `object`
+Default: >
+	{
+	    "tsdetect.nodeOverride": {
+	        "deno.lint": false,
+	        "coc.source.file.trimSameExts": [
+	            ".js",
+	            ".ts"
+	        ],
+	        "prettier.disableLanguage": []
+	    }
+	}
+<
+
+------------------------------------------------------------------------------
+				  *vim-tsdetect-options_tsdetect.denoOverride*
+
+Workspace configuration to be set in Deno environtment. If you want to extend
+original configuration, you need to include default ones. Not recommended not
+to touch `deno.enable` and `tsserver.enable`.
+
+Values: `object`
+Default: >
+	{
+	    "tsdetect.denoOverride": {
+	        "deno.lint": true,
+	        "coc.source.file.trimSameExts": [],
+	        "prettier.disableLanguage": [
+	            "javascript",
+	            "javascriptreact",
+	            "typescript",
+	            "typescriptreact"
+	        ]
+	    }
+	}
+<
 
 ==============================================================================
-INSTALLATION				*vim-tsdetect-installation*
+Events							 *vim-tsdetect-events*
 
-TODO
-|:CocInstall| coc-tsdetect
+------------------------------------------------------------------------------
+					 *vim-tsdetect-events_tsdetect#detect*
+
+`tsdetect#detect`
+Fired when the tsdetect detects TypeScript environment in the flow shown in
+above.
+
+------------------------------------------------------------------------------
+				    *vim-tsdetect-events_tsdetect#detect#node*
+
+`tsdetect#detect#node`
+Fired when |vim-tsdetect-events_tsdetect#detect| is fired and environtment was
+detected as node.
+
+------------------------------------------------------------------------------
+				    *vim-tsdetect-events_tsdetect#detect#deno*
+
+`tsdetect#detect#deno`
+Fired when |vim-tsdetect-events_tsdetect#detect| is fired and environtment was
+detected as deno.
+
+------------------------------------------------------------------------------
+		     *vim-tsdetect-events_tsdetect#coc#auto#swtich#node#after*
+
+`tsdetect#coc#auto#swtich#node#after`
+Fired after the automatic switch to node triggered and finished.
+
+------------------------------------------------------------------------------
+		     *vim-tsdetect-events_tsdetect#coc#auto#swtich#deno#after*
+
+`tsdetect#coc#auto#swtich#deno#after`
+Fired after the automatic switch to deno triggered and finished.
 
 ==============================================================================
-OPTIONS					*vim-tsdetect-options*
+VARIABLES					      *vim-tsdetect-variables*
 
-TODO
+------------------------------------------------------------------------------
+							  *b:tsdetect_is_node*
+
+Set 0(deno) or 1(node) when `tsdetect#detect` is fired.
 
 ==============================================================================
-FUNCTIONS 				*vim-tsdetect-functions*
+LIMITATIONS					    *vim-tsdetect-limitations*
 
-TODO
+- Not recommended to include `deno.enable` and `tsserver.enable` settings in
+  user configuration (`~/.vim/coc-settings.json` that can be opened by
+  |:CocConfig|).
+
+==============================================================================
+EXAMPLES					       *vim-tsdetect-examples*
+
+Example for deno.cache on save if deno environment is detected: >
+	function! s:my_coc_tsdetect_buf_write_post() abort
+	    if !get(g:, 'coc_enabled', 0)
+	        return
+	    endif
+	    if exists('b:tsdetect_is_node') && !b:tsdetect_is_node
+	        CocCommand deno.cache
+	    endif
+	endfunction
+	
+	augroup my-coc-tsdetect
+	    autocmd!
+	    autocmd BufWritePost * call <SID>my_coc_tsdetect_buf_write_post()
+	augroup END
+<
 
 ==============================================================================
 vim:tw=78:ts=8:noet:ft=help:norl
