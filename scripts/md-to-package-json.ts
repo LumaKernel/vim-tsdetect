@@ -23,7 +23,7 @@ const appliedJson = applyOptionDeclarations(
   packageJsonContent as any,
   parseReadme,
 );
-//
+
 if (exitCode) {
   if (!equal(appliedJson, packageJsonContent)) {
     console.error("md-to-package-json.ts is not applied.");
