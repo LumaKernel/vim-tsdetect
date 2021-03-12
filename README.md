@@ -156,6 +156,7 @@ Set when `tsdetect#detect` is fired.
 ## Limitations
 
 - Not recommended to include `deno.enable` and `tsserver.enable` settings in user configuration (`~/.vim/coc-settings.json` that can be opened by `:CocConfig`).
+- To prevent `.vim/` directory being commited by VCS, you can globally ignore `.vim/`, or ignore one by one using `git update-index --skip-worktree .vim` for git projects.
 
 ## Example Configurations
 
