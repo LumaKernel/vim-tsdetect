@@ -22,7 +22,7 @@ INSTALLATION					   *vim-tsdetect-installation*
 
 Run |:CocInstall| `coc-tsdetect` in vim/neovim or install `vim-tsdetect`
 with your favorite plugin manager and build with `yarn && yarn build`. It is
-enought to install one of them.
+enough to install one of them.
 
 ==============================================================================
 IMPLEMENTATION DETAILS			 *vim-tsdetect-implementation-details*
@@ -48,7 +48,7 @@ Checking following in order.
 ------------------------------------------------------------------------------
 When does this try to detect?
 
-This tries to detect when following events occured.
+This tries to detect when following events occurred.
 - |FileType| `javascript,javascriptreact,typescript,typescript.tsx,typescriptreact`
 - |BufEnter|,|BufNewFile|,|BufWritePost| `*`
 
@@ -61,7 +61,7 @@ Please configure following if necessary by `:CocConfig`.
 					  *vim-tsdetect-options_tsdetect.mode*
 
 Set this `"manual"` to disable auto initialization. Variable
-|b:tsdetect_is_node| remains avaiable.
+|b:tsdetect_is_node| remains available.
 
 Values: `"auto" | "manual"`
 Default: >
@@ -101,7 +101,7 @@ Default: >
 ------------------------------------------------------------------------------
 				  *vim-tsdetect-options_tsdetect.nodeOverride*
 
-Workspace configuration to be set in Node.js environtment. If you want to
+Workspace configuration to be set in Node.js environment. If you want to
 extend original configuration, you need to include default ones. Not
 recommended to touch `deno.enable` and `tsserver.enable`.
 
@@ -122,7 +122,7 @@ Default: >
 ------------------------------------------------------------------------------
 				  *vim-tsdetect-options_tsdetect.denoOverride*
 
-Workspace configuration to be set in Deno environtment. If you want to extend
+Workspace configuration to be set in Deno environment. If you want to extend
 original configuration, you need to include default ones. Not recommended not
 to touch `deno.enable` and `tsserver.enable`.
 
@@ -156,7 +156,7 @@ above.
 				    *vim-tsdetect-events_tsdetect#detect#node*
 
 `tsdetect#detect#node`
-Fired when |vim-tsdetect-events_tsdetect#detect| is fired and environtment was
+Fired when |vim-tsdetect-events_tsdetect#detect| is fired and environment was
 detected as node.
 
 ------------------------------------------------------------------------------
@@ -167,15 +167,15 @@ Fired when |vim-tsdetect-events_tsdetect#detect| is fired and environtment was
 detected as deno.
 
 ------------------------------------------------------------------------------
-		     *vim-tsdetect-events_tsdetect#coc#auto#swtich#node#after*
+		     *vim-tsdetect-events_tsdetect#coc#auto#switch#node#after*
 
-`tsdetect#coc#auto#swtich#node#after`
+`tsdetect#coc#auto#switch#node#after`
 Fired after the automatic switch to node triggered and finished.
 
 ------------------------------------------------------------------------------
-		     *vim-tsdetect-events_tsdetect#coc#auto#swtich#deno#after*
+		     *vim-tsdetect-events_tsdetect#coc#auto#switch#deno#after*
 
-`tsdetect#coc#auto#swtich#deno#after`
+`tsdetect#coc#auto#switch#deno#after`
 Fired after the automatic switch to deno triggered and finished.
 
 ==============================================================================

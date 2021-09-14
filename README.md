@@ -8,7 +8,7 @@
 
 ## Installation
 
-Run `:CocInsatll coc-tsdetect` in vim/neovim or install `vim-tsdetect` with your favorite plugin manager and build with `yarn && yarn build`. It is enought to install one of them.
+Run `:CocInstall coc-tsdetect` in vim/neovim or install `vim-tsdetect` with your favorite plugin manager and build with `yarn && yarn build`. It is enough to install one of them.
 
 ## How does this detect TS environments?
 
@@ -29,7 +29,7 @@ Checking following in order.
 
 ## When does this try to detect?
 
-This tries to detect when following events occured.
+This tries to detect when following events occurred.
 
 - `FileType javascript,javascriptreact,typescript,typescript.tsx,typescriptreact`
 - `BufEnter,BufNewFile,BufWritePost *`
@@ -40,7 +40,7 @@ Please configure following if necessary by `:CocConfig`.
 
 ### `tsdetect.mode`
 
-Set this `"manual"` to disable auto initialization. Variable `b:tsdetect_is_node` remains avaiable.
+Set this `"manual"` to disable auto initialization. Variable `b:tsdetect_is_node` remains available.
 
 Values: `"auto" | "manual"`
 
@@ -83,7 +83,7 @@ Default:
 
 ### `tsdetect.nodeOverride`
 
-Workspace configuration to be set in Node.js environtment. If you want to extend original configuration, you need to include default ones. Not recommended to touch `deno.enable` and `tsserver.enable`.
+Workspace configuration to be set in Node.js environment. If you want to extend original configuration, you need to include default ones. Not recommended to touch `deno.enable` and `tsserver.enable`.
 
 Values: `object`
 
@@ -104,7 +104,7 @@ Default:
 
 ### `tsdetect.denoOverride`
 
-Workspace configuration to be set in Deno environtment. If you want to extend original configuration, you need to include default ones. Not recommended not to touch `deno.enable` and `tsserver.enable`.
+Workspace configuration to be set in Deno environment. If you want to extend original configuration, you need to include default ones. Not recommended not to touch `deno.enable` and `tsserver.enable`.
 
 Values: `object`
 
@@ -133,17 +133,17 @@ Fired when the tsdetect detects TypeScript environment in the flow shown in abov
 
 ### `tsdetect#detect#node`
 
-Fired when `tsdetect#detect` is fired and environtment was detected as node.
+Fired when `tsdetect#detect` is fired and environment was detected as node.
 
 ### `tsdetect#detect#deno`
 
-Fired when `tsdetect#detect` is fired and environtment was detected as deno.
+Fired when `tsdetect#detect` is fired and environment was detected as deno.
 
-### `tsdetect#coc#auto#swtich#node#after`
+### `tsdetect#coc#auto#switch#node#after`
 
 Fired after the automatic switch to node triggered and finished.
 
-### `tsdetect#coc#auto#swtich#deno#after`
+### `tsdetect#coc#auto#switch#deno#after`
 
 Fired after the automatic switch to deno triggered and finished.
 
@@ -156,7 +156,7 @@ Set when `tsdetect#detect` is fired.
 ## Limitations
 
 - Not recommended to include `deno.enable` and `tsserver.enable` settings in user configuration (`~/.vim/coc-settings.json` that can be opened by `:CocConfig`).
-- To prevent `.vim/` directory being commited by VCS, you can globally ignore `.vim/`, or ignore one by one using `git update-index --skip-worktree .vim` for git projects.
+- To prevent `.vim/` directory being committed by VCS, you can globally ignore `.vim/`, or ignore one by one using `git update-index --skip-worktree .vim` for git projects.
 
 ## Example Configurations
 
