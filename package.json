@@ -176,5 +176,13 @@
   },
   "engines": {
     "coc": "^0.0.80"
+  },
+  "homepage": "https://github.com/LumaKernel/vim-tsdetect#readme",
+  "bugs": {
+    "url": "https://github.com/LumaKernel/vim-tsdetect/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LumaKernel/vim-tsdetect.git"
   }
 }
