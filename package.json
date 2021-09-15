@@ -31,7 +31,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "build": "pnpm run ts-node-run ./scripts/build.ts",
+    "build": "pnpm run ts-node-run -- ./scripts/build.ts",
     "coverage": "jest --coverage",
     "dev": "onchange -i \"**/*.ts\" \"tsconfig*.json\" -- pnpm run build",
     "lint-fix": "pnpm run lint -- --fix",
@@ -72,7 +72,7 @@
         "tsdetect.mode": {
           "type": "string",
           "default": "auto",
-          "markdownDescription": "Set this `\"manual\"` to disable auto initialization. Variable `b:tsdetect_is_node` remains avaiable.",
+          "markdownDescription": "Set this `\"manual\"` to disable auto initialization. Variable `b:tsdetect_is_node` remains available.",
           "enum": [
             "auto",
             "manual"
@@ -113,7 +113,7 @@
           "examples": [
             {}
           ],
-          "markdownDescription": "Workspace configuration to be set in Node.js environtment. If you want to extend original configuration, you need to include default ones. Not recommended to touch `deno.enable` and `tsserver.enable`."
+          "markdownDescription": "Workspace configuration to be set in Node.js environment. If you want to extend original configuration, you need to include default ones. Not recommended to touch `deno.enable` and `tsserver.enable`."
         },
         "tsdetect.denoOverride": {
           "type": "object",
@@ -133,7 +133,7 @@
               "deno.unstable": true
             }
           ],
-          "markdownDescription": "Workspace configuration to be set in Deno environtment. If you want to extend original configuration, you need to include default ones. Not recommended not to touch `deno.enable` and `tsserver.enable`."
+          "markdownDescription": "Workspace configuration to be set in Deno environment. If you want to extend original configuration, you need to include default ones. Not recommended not to touch `deno.enable` and `tsserver.enable`."
         }
       }
     }
