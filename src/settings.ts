@@ -1,13 +1,13 @@
-import { workspace } from "coc.nvim";
-import assert from "assert";
+import { workspace } from 'coc.nvim';
+import assert from 'assert';
 
-export const EXTENSION_NS = "tsdetect";
+export const EXTENSION_NS = 'tsdetect';
 
-export type TsRuntime = "node" | "deno";
+export type TsRuntime = 'node' | 'deno';
 
 export interface Settings {
   /** @default "auto" */
-  mode: "auto" | "manual";
+  mode: 'auto' | 'manual';
   /** @default true */
   doNotCreateOnNode: boolean;
   /** @default true */
@@ -15,13 +15,7 @@ export interface Settings {
   denoOverride: { [key: string]: unknown };
   nodeOverride: { [key: string]: unknown };
 }
-export const settingsKeys = [
-  "mode",
-  "doNotCreateOnNode",
-  "doNothingIfConfigExists",
-  "denoOverride",
-  "nodeOverride",
-];
+export const settingsKeys = ['mode', 'doNotCreateOnNode', 'doNothingIfConfigExists', 'denoOverride', 'nodeOverride'];
 
 export const getSettings = (): Settings => {
   const settings = workspace.getConfiguration(EXTENSION_NS);
@@ -30,8 +24,7 @@ export const getSettings = (): Settings => {
   settingsKeys.forEach((key) => {
     const value = settings.inspect(key);
     assert(value);
-    result[key] =
-      value.workspaceValue ?? value.globalValue ?? value.defaultValue;
+    result[key] = value.workspaceValue ?? value.globalValue ?? value.defaultValue;
   });
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return result;

@@ -1,6 +1,7 @@
 # vim-tsdetect
 
 [![npm](https://img.shields.io/npm/v/coc-tsdetect?style=flat-square)](https://www.npmjs.com/package/coc-tsdetect)
+[![Luma Style Guide](https://img.shields.io/badge/styled%20with-luma-%23c5ebeb?style=flat-square)](https://github.com/luma-dev/luma-style-guide#readme)
 [![GitHub Workflow Status - CI](https://img.shields.io/github/workflow/status/LumaKernel/vim-tsdetect/CI?style=flat-square)](https://github.com/LumaKernel/vim-tsdetect/actions/workflows/ci.yml?query=branch%3Amain)
 [![Codecov](https://img.shields.io/codecov/c/github/LumaKernel/vim-tsdetect?style=flat-square)](https://app.codecov.io/gh/LumaKernel/vim-tsdetect)
 
@@ -8,7 +9,7 @@
 
 ## Installation
 
-Run `:CocInstall coc-tsdetect` in vim/neovim or install `vim-tsdetect` with your favorite plugin manager and build with `yarn && yarn build`. It is enough to install one of them.
+Run `:CocInstall coc-tsdetect` in vim/neovim or install `vim-tsdetect` with your favorite plugin manager and build with `pnpm install && pnpm run build`. It is enough to install one of them.
 
 ## How does this detect TS environments?
 
