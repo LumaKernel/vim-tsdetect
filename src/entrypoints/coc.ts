@@ -1,7 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import type { ExtensionContext } from 'coc.nvim';
 import { workspace, commands } from 'coc.nvim';
-import assert from 'assert';
 import { autoInitializeWorkspace, manualInitializeWorkspace } from '../commands';
 import { EXTENSION_NS, getSettings } from '../settings';
 
@@ -21,7 +20,7 @@ const initialize = async (_context: ExtensionContext): Promise<void> => {
 export const activate = async (context: ExtensionContext): Promise<void> => {
   // Setup vim runtime settings as vim plugin.
   const rtp = await workspace.nvim.getOption('runtimepath');
-  assert(typeof rtp === 'string');
+  if (typeof rtp !== 'string') throw new Error('[coc-tsdetect] Failed to get runtimepath.');
   const paths = rtp.split(',');
   if (!paths.includes(context.extensionPath)) {
     await workspace.nvim.command(`execute 'noautocmd set runtimepath^='.fnameescape('${context.extensionPath}')`);
