@@ -1,5 +1,4 @@
 import { workspace } from 'coc.nvim';
-import assert from 'assert';
 
 export const EXTENSION_NS = 'tsdetect';
 
@@ -23,8 +22,9 @@ export const getSettings = (): Settings => {
   const result: any = Object.create(null);
   settingsKeys.forEach((key) => {
     const value = settings.inspect(key);
-    assert(value);
-    result[key] = value.workspaceValue ?? value.globalValue ?? value.defaultValue;
+    if (value) {
+      result[key] = value.workspaceValue ?? value.globalValue ?? value.defaultValue;
+    }
   });
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return result;
