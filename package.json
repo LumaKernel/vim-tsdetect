@@ -1,6 +1,6 @@
 {
   "name": "coc-tsdetect",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "coc.nvim extensions for detecting node and deno environment.",
   "keywords": [
     "deno",

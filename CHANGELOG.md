@@ -1,3 +1,10 @@
+## [3.0.4](https://github.com/LumaKernel/vim-tsdetect/compare/v3.0.3...v3.0.4) (2021-09-15)
+
+
+### Bug Fixes
+
+* typing ([c93ccf9](https://github.com/LumaKernel/vim-tsdetect/commit/c93ccf947d7c2004e5462ce39d2d0457b4285c49))
+
 ## [3.0.3](https://github.com/LumaKernel/vim-tsdetect/compare/v3.0.2...v3.0.3) (2021-03-06)
 
 
