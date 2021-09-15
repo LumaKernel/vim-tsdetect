@@ -182,6 +182,6 @@ augroup END
 
 [MIT](./LICENSE)
 
-## Credits
+## Author
 
-- Author: [Luma](https://github.com/LumaKernel)
+[Luma](https://github.com/LumaKernel)
