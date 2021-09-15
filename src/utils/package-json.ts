@@ -1,4 +1,4 @@
-import type { OptionDeclaration } from "./readme";
+import type { OptionDeclaration } from './readme';
 
 export type ContributesConfigurationsConfiguration = {
   type: string;
@@ -28,13 +28,11 @@ export const applyOptionDeclarations = (
   optionDeclarations.forEach((declaration) => {
     const property = properties[declaration.optionName];
     if (!property) {
-      throw new Error(
-        `Option ${declaration.optionName} in README does not exist in package.json.`,
-      );
+      throw new Error(`Option ${declaration.optionName} in README does not exist in package.json.`);
     }
     properties[declaration.optionName] = {
       ...property,
-      markdownDescription: declaration.descriptionLines.join("\n"),
+      markdownDescription: declaration.descriptionLines.join('\n'),
     };
   });
 

@@ -3,16 +3,13 @@ export type OptionDeclaration = {
   descriptionLines: string[];
 };
 
-export const parseOptionLines = (
-  optionName: string,
-  optionLines: readonly string[],
-): OptionDeclaration => {
+export const parseOptionLines = (optionName: string, optionLines: readonly string[]): OptionDeclaration => {
   const lines = optionLines.slice(
     0,
-    optionLines.findIndex((line) => line.startsWith("Values: ")),
+    optionLines.findIndex((line) => line.startsWith('Values: ')),
   );
-  while (lines[0] === "") lines.shift();
-  while (lines[lines.length - 1] === "") lines.pop();
+  while (lines[0] === '') lines.shift();
+  while (lines[lines.length - 1] === '') lines.pop();
 
   return {
     optionName,
@@ -20,9 +17,7 @@ export const parseOptionLines = (
   };
 };
 
-export const parseReadmeMd = (
-  lines: readonly string[],
-): OptionDeclaration[] => {
+export const parseReadmeMd = (lines: readonly string[]): OptionDeclaration[] => {
   const optionsLines: { [optionName: string]: string[] } = {};
   let start = false;
   let end = false;
@@ -34,21 +29,21 @@ export const parseReadmeMd = (
     .forEach((line) => {
       if (end) return;
       if (!start) {
-        if (line === "## Options") start = true;
+        if (line === '## Options') start = true;
         return;
       }
-      if (line.startsWith("## ")) {
+      if (line.startsWith('## ')) {
         end = true;
         return;
       }
 
-      const isHead = line.startsWith("### ");
+      const isHead = line.startsWith('### ');
       if (isHead) {
         const headPattern = /^### `(.*)`$/;
         if (!headPattern.test(line)) {
-          throw new Error("Illegal heading pattern of option name.");
+          throw new Error('Illegal heading pattern of option name.');
         }
-        nowHead = line.replace(headPattern, "$1");
+        nowHead = line.replace(headPattern, '$1');
         optionsLines[nowHead] = [];
         return;
       }

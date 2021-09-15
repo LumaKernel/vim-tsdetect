@@ -1,22 +1,22 @@
-import { applyOptionDeclarations } from "../package-json";
+import { applyOptionDeclarations } from '../package-json';
 
-describe("applyOptionDeclarations", () => {
-  it("should apply changes of options declarations to package json", () => {
+describe('applyOptionDeclarations', () => {
+  it('should apply changes of options declarations to package json', () => {
     expect(
       applyOptionDeclarations(
         {
           contributes: {
             configuration: {
-              type: "object",
-              title: "Awesome Extension",
+              type: 'object',
+              title: 'Awesome Extension',
               properties: {
-                "extension.a": {
-                  type: "string",
-                  default: "abc",
-                  markdownDescription: "Foo bar",
+                'extension.a': {
+                  type: 'string',
+                  default: 'abc',
+                  markdownDescription: 'Foo bar',
                 },
-                "extension.b": {
-                  type: "boolean",
+                'extension.b': {
+                  type: 'boolean',
                   default: false,
                 },
               },
@@ -25,30 +25,30 @@ describe("applyOptionDeclarations", () => {
         },
         [
           {
-            optionName: "extension.a",
-            descriptionLines: ["Hi", "Hello"],
+            optionName: 'extension.a',
+            descriptionLines: ['Hi', 'Hello'],
           },
           {
-            optionName: "extension.b",
-            descriptionLines: ["You should use `true`."],
+            optionName: 'extension.b',
+            descriptionLines: ['You should use `true`.'],
           },
         ],
       ),
     ).toEqual({
       contributes: {
         configuration: {
-          type: "object",
-          title: "Awesome Extension",
+          type: 'object',
+          title: 'Awesome Extension',
           properties: {
-            "extension.a": {
-              type: "string",
-              default: "abc",
-              markdownDescription: "Hi\nHello",
+            'extension.a': {
+              type: 'string',
+              default: 'abc',
+              markdownDescription: 'Hi\nHello',
             },
-            "extension.b": {
-              type: "boolean",
+            'extension.b': {
+              type: 'boolean',
               default: false,
-              markdownDescription: "You should use `true`.",
+              markdownDescription: 'You should use `true`.',
             },
           },
         },
@@ -56,17 +56,17 @@ describe("applyOptionDeclarations", () => {
     });
   });
 
-  it("should throw for absent application", () => {
+  it('should throw for absent application', () => {
     expect(() =>
       applyOptionDeclarations(
         {
           contributes: {
             configuration: {
-              type: "object",
-              title: "Awesome Extension",
+              type: 'object',
+              title: 'Awesome Extension',
               properties: {
-                "extension.c": {
-                  type: "boolean",
+                'extension.c': {
+                  type: 'boolean',
                   default: false,
                 },
               },
@@ -75,8 +75,8 @@ describe("applyOptionDeclarations", () => {
         },
         [
           {
-            optionName: "extension.a",
-            descriptionLines: ["Hi"],
+            optionName: 'extension.a',
+            descriptionLines: ['Hi'],
           },
         ],
       ),
