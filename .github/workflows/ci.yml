@@ -61,7 +61,7 @@ jobs:
               args: [--frozen-lockfile, --prefer-offline]
       - run: pnpm run ts-node-run -- ./scripts/md-to-package-json.ts --exit-code
       - run: pnpm run lint
-      - run: pnpm run typecheck
+      - run: pnpm test
       - run: pnpm run coverage
       - uses: codecov/codecov-action@v1
       - run: pnpm run build
