@@ -1,3 +1,10 @@
+## [3.0.5](https://github.com/LumaKernel/vim-tsdetect/compare/v3.0.4...v3.0.5) (2022-03-10)
+
+
+### Bug Fixes
+
+* fix prettier option name ([8bf846a](https://github.com/LumaKernel/vim-tsdetect/commit/8bf846a08f7eefd4787d93b1a8a49c5d1ade9e3c))
+
 ## [3.0.4](https://github.com/LumaKernel/vim-tsdetect/compare/v3.0.3...v3.0.4) (2021-09-15)
 
 
