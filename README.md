@@ -98,7 +98,7 @@ Default:
       ".js",
       ".ts"
     ],
-    "prettier.disableLanguage": []
+    "prettier.disableLanguages": []
   }
 }
 ```
@@ -116,7 +116,7 @@ Default:
   "tsdetect.denoOverride": {
     "deno.lint": true,
     "coc.source.file.trimSameExts": [],
-    "prettier.disableLanguage": [
+    "prettier.disableLanguages": [
       "javascript",
       "javascriptreact",
       "typescript",
