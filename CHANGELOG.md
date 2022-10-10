@@ -1,3 +1,16 @@
+# [4.0.0](https://github.com/LumaKernel/vim-tsdetect/compare/v3.0.5...v4.0.0) (2022-10-10)
+
+
+### Features
+
+* force trigger release ([e15665f](https://github.com/LumaKernel/vim-tsdetect/commit/e15665f6a24c39b6cc6cd50e9873c4b98e588f89))
+
+
+### BREAKING CHANGES
+
+* show commit 8a4ec01769e144010253361e267e41cb21c5bc19
+(https://github.com/LumaKernel/vim-tsdetect/commit/8a4ec01769e144010253361e267e41cb21c5bc19)
+
 ## [3.0.5](https://github.com/LumaKernel/vim-tsdetect/compare/v3.0.4...v3.0.5) (2022-03-10)
 
 
