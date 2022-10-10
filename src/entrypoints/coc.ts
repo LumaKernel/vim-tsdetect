@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import type { ExtensionContext } from 'coc.nvim';
 import { workspace, commands } from 'coc.nvim';
 import { autoInitializeWorkspace, manualInitializeWorkspace } from '../commands';
@@ -11,7 +10,7 @@ const initialize = async (_context: ExtensionContext): Promise<void> => {
   proms.push(workspace.nvim.call('tsdetect#coc#setup_switch', [settings.mode]));
 
   if (settings.mode === 'auto') {
-    proms.push(workspace.nvim.call(`tsdetect#coc#auto#switch`));
+    proms.push(workspace.nvim.call('tsdetect#coc#auto#switch'));
   }
 
   await Promise.all(proms);
@@ -57,4 +56,3 @@ export const activate = async (context: ExtensionContext): Promise<void> => {
   // Initialize after launched coc-tsdetect.
   await initialize(context);
 };
-/* eslint-enable import/prefer-default-export */

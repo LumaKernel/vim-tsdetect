@@ -5,8 +5,9 @@ coverage:
   precision: 2
   round: down
   status:
-    default:
-      target: 0%
+    project:
+      default:
+        target: 0%
 
 comment:
   layout: "reach,diff,flags,files,footer"

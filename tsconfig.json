@@ -23,7 +23,9 @@
     "preserveConstEnums": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "noLib": true,
+    "lib": [
+      "ES2015"
+    ],
     "useDefineForClassFields": true,
     "baseUrl": "src",
     "inlineSourceMap": true
