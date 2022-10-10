@@ -18,7 +18,6 @@ export const settingsKeys = ['mode', 'doNotCreateOnNode', 'doNothingIfConfigExis
 
 export const getSettings = (): Settings => {
   const settings = workspace.getConfiguration(EXTENSION_NS);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const result: any = Object.create(null);
   settingsKeys.forEach((key) => {
     const value = settings.inspect(key);
@@ -26,6 +25,5 @@ export const getSettings = (): Settings => {
       result[key] = value.workspaceValue ?? value.globalValue ?? value.defaultValue;
     }
   });
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return result;
 };

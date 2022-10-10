@@ -28,10 +28,6 @@ Checking following in order.
     b. Shebang is present and including `deno` -> **deno**  
 4. Otherwise, nothing is detected.  
 
-## Optional: To suppress errors on switching to node
-
-To suppress errors what you'll see when switching to node, you should use [my patched coc-deno](https://github.com/LumaKernel/coc-deno-pruned) (not published to npm, so you should install as vim script and build) instead of official until [the issue](https://github.com/fannheyward/coc-deno/issues/184) is fixed.
-
 ## When does this try to detect?
 
 This tries to detect when following events occurred.

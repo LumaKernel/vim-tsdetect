@@ -8,7 +8,6 @@ const configure = async (runtime: TsRuntime, settings: Settings): Promise<void> 
   await setConfigWorkspace('deno', 'enable', runtime === 'deno');
   const override = runtime === 'node' ? settings.nodeOverride : settings.denoOverride;
 
-  /* eslint-disable no-restricted-syntax,no-await-in-loop,no-continue */
   for (const key of Object.keys(override)) {
     const ns = key.split('.');
     const nsKey = ns.pop();
@@ -18,7 +17,6 @@ const configure = async (runtime: TsRuntime, settings: Settings): Promise<void> 
     }
     await setConfigWorkspace(ns.join('.'), nsKey, override[key]);
   }
-  /* eslint-enable no-restricted-syntax,no-await-in-loop,no-continue */
   await commands.executeCommand('editor.action.restart');
 };
 

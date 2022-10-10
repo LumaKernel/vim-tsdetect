@@ -29,7 +29,7 @@ jobs:
             ${{ runner.os }}-
       - uses: pnpm/action-setup@v2
         with:
-          version: 6
+          version: 7
           run_install: |
             - recursive: true
               args: [--frozen-lockfile, --prefer-offline]
@@ -40,7 +40,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [14]
+        node-version:
+          - 14
+          - 16
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -55,15 +57,17 @@ jobs:
             ${{ runner.os }}-
       - uses: pnpm/action-setup@v2
         with:
-          version: 6
+          version: 7
           run_install: |
             - recursive: true
               args: [--frozen-lockfile, --prefer-offline]
       - run: pnpm run ts-node-run -- ./scripts/md-to-package-json.ts --exit-code
       - run: pnpm run lint
-      - run: pnpm test:tsc
+      - run: pnpm run check
       - run: pnpm run coverage
       - uses: codecov/codecov-action@v1
+        with:
+          files: ./coverage/lcov.info
       - run: pnpm run build
   release:
     needs: test
@@ -83,13 +87,12 @@ jobs:
             ${{ runner.os }}-
       - uses: pnpm/action-setup@v2
         with:
-          version: 6
+          version: 7
           run_install: |
             - recursive: true
               args: [--frozen-lockfile, --prefer-offline]
       - run: pnpm run build
       - run: npx semantic-release
         env:
-          HUSKY: 0
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
