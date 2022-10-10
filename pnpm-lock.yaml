@@ -26,6 +26,7 @@ specifiers:
   ts-node: ^10.9.1
   tsconfig-paths: ^4.1.0
   typescript: ^4.4.3
+  vite: ^3.1.7
   vitest: ^0.24.0
 
 dependencies:
@@ -56,6 +57,7 @@ devDependencies:
   ts-node: 10.9.1_ao2bnxvygxjshzlt66j3ehlnum
   tsconfig-paths: 4.1.0
   typescript: 4.4.3
+  vite: 3.1.7
   vitest: 0.24.0
 
 packages:
@@ -3222,7 +3224,7 @@ packages:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
     dependencies:
       hosted-git-info: 2.8.9
-      resolve: 1.20.0
+      resolve: 1.22.1
       semver: 5.7.1
       validate-npm-package-license: 3.0.4
     dev: true
@@ -3232,7 +3234,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       hosted-git-info: 4.0.2
-      is-core-module: 2.6.0
+      is-core-module: 2.10.0
       semver: 7.3.5
       validate-npm-package-license: 3.0.4
     dev: true
@@ -3843,7 +3845,7 @@ packages:
   /resolve/1.20.0:
     resolution: {integrity: sha512-wENBPt4ySzg4ybFQW2TT1zMQucPK95HSh/nq2CFTZVOGut2+pQvSsgtda4d26YrYcr067wjbmzOG8byDPBX63A==}
     dependencies:
-      is-core-module: 2.6.0
+      is-core-module: 2.10.0
       path-parse: 1.0.7
     dev: true
 
