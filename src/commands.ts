@@ -32,9 +32,8 @@ export const manualInitializeWorkspace = async (runtime: TsRuntime): Promise<voi
 export const autoInitializeWorkspace = async (runtime: TsRuntime): Promise<void> => {
   const configuration = workspace.getConfiguration();
   const settings = getSettings();
-  const exists = configuration.has('');
+  const exists = configuration.has('tsserver.enable');
 
-  if (settings.doNothingIfConfigExists && exists) return;
   if (settings.doNotCreateOnNode && runtime === 'node' && !exists) return;
 
   const tsserverConfig = workspace.getConfiguration('tsserver');
