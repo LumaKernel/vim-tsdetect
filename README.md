@@ -67,21 +67,6 @@ Default:
 }
 ```
 
-### `tsdetect.doNothingIfConfigExists`
-
-By default, tsdetect does not touch a workspace configuration (`.vim/coc-settings.json`) originally there. Set this `false` to touch configuration even though the configuration already exists. This is suitable for switching frequently `node` and `deno` without touching configuration manually.
-
-
-Values: `boolean`
-
-Default:
-
-```json
-{
-  "tsdetect.doNothingIfConfigExists": true
-}
-```
-
 ### `tsdetect.nodeOverride`
 
 Workspace configuration to be set in Node.js environment. If you want to extend original configuration, you need to include default ones. Not recommended to touch `deno.enable` and `tsserver.enable`.

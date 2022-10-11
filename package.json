@@ -92,15 +92,6 @@
           ],
           "markdownDescription": "By default, in Node.js environment, tsdetect does not create a workspace configuration (`.vim/coc-settings.json`). Set this `false` to create configuration file whether the configuration exists."
         },
-        "tsdetect.doNothingIfConfigExists": {
-          "type": "boolean",
-          "default": true,
-          "examples": [
-            false,
-            true
-          ],
-          "markdownDescription": "By default, tsdetect does not touch a workspace configuration (`.vim/coc-settings.json`) originally there. Set this `false` to touch configuration even though the configuration already exists. This is suitable for switching frequently `node` and `deno` without touching configuration manually."
-        },
         "tsdetect.nodeOverride": {
           "type": "object",
           "default": {
