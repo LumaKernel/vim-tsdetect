@@ -1,3 +1,10 @@
+## [4.0.2](https://github.com/LumaKernel/vim-tsdetect/compare/v4.0.1...v4.0.2) (2022-10-11)
+
+
+### Bug Fixes
+
+* Change initialization order (recommit to trigger release) ([6181449](https://github.com/LumaKernel/vim-tsdetect/commit/61814490829d5246e28108b4df91a46184b1c454))
+
 ## [4.0.1](https://github.com/LumaKernel/vim-tsdetect/compare/v4.0.0...v4.0.1) (2022-10-11)
 
 
