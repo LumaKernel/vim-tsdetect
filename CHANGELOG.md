@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/LumaKernel/vim-tsdetect/compare/v4.0.0...v4.0.1) (2022-10-11)
+
+
+### Bug Fixes
+
+* abandon tsdetect.doNothingIfConfigExists option ([165a0f1](https://github.com/LumaKernel/vim-tsdetect/commit/165a0f1c80ba6410b534ad5a0c2e9e773c9e6a14))
+
 # [4.0.0](https://github.com/LumaKernel/vim-tsdetect/compare/v3.0.5...v4.0.0) (2022-10-10)
 
 
