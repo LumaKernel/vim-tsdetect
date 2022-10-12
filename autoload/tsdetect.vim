@@ -19,6 +19,11 @@ function! tsdetect#init() abort
 
   augroup tsdetect#init
     autocmd!
+    autocmd User tsdetect#detect :
+    autocmd User tsdetect#detect#node :
+    autocmd User tsdetect#detect#deno :
+    autocmd User tsdetect#coc#auto#switch#node#after :
+    autocmd User tsdetect#coc#auto#switch#deno#after :
     autocmd FileType javascript,javascriptreact,typescript,typescript.tsx,typescriptreact ++nested call <SID>detect_filetype()
     autocmd BufEnter,BufNewFile,BufWritePost * ++nested call <SID>detect_buffer(expand('<amatch>'))
   augroup END
