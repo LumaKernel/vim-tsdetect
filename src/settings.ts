@@ -12,7 +12,7 @@ export interface Settings {
   denoOverride: { [key: string]: unknown };
   nodeOverride: { [key: string]: unknown };
 }
-export const settingsKeys = ['mode', 'doNotCreateOnNode', 'doNothingIfConfigExists', 'denoOverride', 'nodeOverride'];
+export const settingsKeys = ['mode', 'doNotCreateOnNode', 'denoOverride', 'nodeOverride'];
 
 export const getSettings = (): Settings => {
   const settings = workspace.getConfiguration(EXTENSION_NS);
