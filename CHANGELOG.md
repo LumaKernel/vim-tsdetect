@@ -1,3 +1,10 @@
+## [4.0.3](https://github.com/LumaKernel/vim-tsdetect/compare/v4.0.2...v4.0.3) (2022-10-12)
+
+
+### Bug Fixes
+
+* release patch update ([c224b48](https://github.com/LumaKernel/vim-tsdetect/commit/c224b4800683d0d7fe0e775f324bf8ad2c60d292))
+
 ## [4.0.2](https://github.com/LumaKernel/vim-tsdetect/compare/v4.0.1...v4.0.2) (2022-10-11)
 
 
