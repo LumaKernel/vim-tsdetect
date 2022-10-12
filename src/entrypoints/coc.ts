@@ -25,7 +25,7 @@ export const activate = async (context: ExtensionContext): Promise<void> => {
     await workspace.nvim.command(`execute 'noautocmd set runtimepath^='.fnameescape('${context.extensionPath}')`);
   }
   await workspace.nvim.command('runtime plugin/tsdetect.vim');
-  
+
   // Setup manual commands.
   (['deno', 'node'] as const).forEach((target) => {
     context.subscriptions.push(
