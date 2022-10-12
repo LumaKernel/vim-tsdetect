@@ -9,8 +9,6 @@ export interface Settings {
   mode: 'auto' | 'manual';
   /** @default true */
   doNotCreateOnNode: boolean;
-  /** @default true */
-  doNothingIfConfigExists: boolean;
   denoOverride: { [key: string]: unknown };
   nodeOverride: { [key: string]: unknown };
 }

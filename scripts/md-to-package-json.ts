@@ -26,7 +26,7 @@ if (exitCode) {
   }
 } else {
   fs.writeFileSync(packageJsonPath, JSON.stringify(appliedJson as any, null, '  '));
-  execFileSync('yarn', ['eslint', '--fix', packageJsonPath], {
+  execFileSync('pnpm', ['exec', 'eslint', '--fix', packageJsonPath], {
     stdio: 'inherit',
   });
 }
